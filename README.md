@@ -32,7 +32,7 @@ Before running SecEye, ensure you have the following installed:
 # Installation
 <b>1) Clone </b> 
 ```text
-git clone https://github.com/Y0Ux01/SecureCode-Analyzer.git
+git clone https://github.com/v3youx/SecEye.git
 cd SecEye
 ````
 
