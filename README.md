@@ -21,8 +21,6 @@ Before running SecEye, ensure you have the following installed:
 
 * **Ruby**
 * **Kali Linux** or a compatible Linux environment
-* **RubyLLM**
-* **Prawn**
 * Required Kali/Linux security tools
 * **OpenAI API key** or **Google Gemini API key**
 
@@ -31,6 +29,27 @@ Before running SecEye, ensure you have the following installed:
 * **OpenAI**
 * **Google Gemini**
 
+# Installation
+<b>1) Clone </b> 
+```text
+git clone https://github.com/Y0Ux01/SecureCode-Analyzer.git
+cd SecEye
+````
+
+<b>2) Run the script</b>
+```
+bash setup.sh
+```
+
+<b>3) Edit the config/config.rb File and Add Your Api Keys</b>
+```
+GEMINI_API_KEY = "YOUR-API-KEY" 
+OPENAI_API_KEY = "YOUR-API-KEY" 	
+```
+<b>4) Run the command</b>
+```
+ruby youragent
+```
 
 
-Only use SecEye against systems and networks for which you have explicit permission to perform security testing.
+
