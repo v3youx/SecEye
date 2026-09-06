@@ -1,2 +1,2 @@
-# SecAgent - Autonomous Security Assessment Agent
+# SecEye - Autonomous Security Assessment Agent
 
