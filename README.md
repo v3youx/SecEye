@@ -1,2 +1,2 @@
-# SecAgent
- LLM-Powered Autonomous Security Assessment Agent
+# SecAgent - Autonomous Security Assessment Agent
+
