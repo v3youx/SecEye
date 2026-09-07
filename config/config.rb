@@ -1,0 +1,4 @@
+#!/bin/ruby
+
+GEMINI_API_KEY = "AQ.Ab8RN6LyRJHd67g9mWag_hiA8_qbjBkILWhQJfMHloSjd51WiQ"
+OPENAI_API_KEY = ""

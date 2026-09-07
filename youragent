@@ -1,0 +1,130 @@
+#!/bin/ruby
+
+require 'colorize'
+require_relative 'config/config.rb'
+require_relative 'orchestrator/orchestrator.rb'
+require 'readline'
+
+$replace = []
+$chat = nil
+$commands = []
+$valid_commands = []
+$key = nil
+$tools = []
+
+def info()
+puts `figlet YOURAGENT`.colorize(:blue).bold
+puts "-" * 65
+puts "        YourAgent - Autonomous Security Assessment Agent".colorize(:light_blue).bold
+puts "                Developed by Rubal Sharma (v3youx)".colorize(:red).bold
+puts "-" * 65
+
+
+puts "Usage:".bold
+puts "     > Run as root user".colorize(:cyan)
+puts "     > Available Commands: ".colorize(:cyan) + "exit, clear, banner"
+
+puts
+puts "      [*]".colorize(:yellow) + " Give it a task → it selects and runs Kali tools → analyzes output →"
+puts "          finds something interesting → continues testing automatically →"
+puts "          stops when enough information is gathered."
+
+puts
+
+puts "Example Task:".bold
+puts "  > Scan an <IP> for open ports"
+puts "  > Enumerate services on a target"
+puts "  > Pentest a web server <ip> for vulnerabilities"
+puts
+
+
+end
+
+info()
+
+def check_key()
+  begin
+
+    if !File.exist?('config/config.rb') || File.empty?('config/config.rb')
+      puts "[-]File is Empty. Add the keys in this format".colorize(:red)
+      puts 'GEMINI_API_KEY = "" '
+      puts 'OPENAI_API_KEY = ""'
+      exit
+    end
+
+    if GEMINI_API_KEY.empty? && OPENAI_API_KEY.empty?
+      puts "[-] Api key is not SET".colorize(:red).bold
+      exit
+    end
+
+    if !GEMINI_API_KEY.empty? && !OPENAI_API_KEY.empty?
+      $key = "GEMINI"
+    elsif !GEMINI_API_KEY.empty?
+      $key = "GEMINI"
+    elsif !OPENAI_API_KEY.empty?
+      $key = "OPENAI"
+    end
+
+  rescue NameError
+    puts "[-] Add GEMINI_API_KEY and OPENAI_API_KEY in config/config.rb".colorize(:red)
+    puts 'GEMINI_API_KEY = "" '
+    puts 'OPENAI_API_KEY = ""'
+    exit
+  end
+end
+
+check_key()
+
+# Ctrl + c
+Signal.trap("INT") do
+  if File.exist?("memory/memory.json")
+    File.delete("memory/memory.json")
+  end
+
+  puts "\n[-] Exiting...."
+  exit
+end
+
+# Ctrl + z
+Signal.trap("TSTP") do
+  if File.exist?("memory/memory.json")
+    File.delete("memory/memory.json")
+  end
+
+
+  puts "\n[-] Exiting...."
+  exit
+end
+
+
+loop {
+  puts
+
+   user_input = Readline.readline("YourAgent> ", true)
+   if user_input.nil? || user_input.empty?
+   puts "[-] Please Specify the task".colorize(:red).bold
+    break
+    end
+
+
+   if user_input == "exit"
+    if File.exist?("memory/memory.json")
+    system("rm -r memory/memory.json")
+  end
+    break
+  end
+
+ if user_input == "clear"
+  system("cls") || system("clear")
+  next
+end
+
+ if user_input == "banner"
+    info()
+  next
+end
+
+
+
+  orchestrator(user_input)
+}
