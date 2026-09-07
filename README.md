@@ -51,6 +51,7 @@ OPENAI_API_KEY = "YOUR-API-KEY"
 ruby youragent
 ```
 
+
 ## Troubleshooting
 
 ### Faraday / JSON Parsing Error
