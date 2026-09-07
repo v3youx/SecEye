@@ -50,6 +50,40 @@ OPENAI_API_KEY = "YOUR-API-KEY"
 ```
 ruby youragent
 ```
+
+## Troubleshooting
+
+### Faraday / JSON Parsing Error
+
+If you encounter:
+
+```text
+Faraday::ParsingError
+wrong number of arguments (given 2, expected 1)
+```
+
+This can occur due to an incompatibility between `Faraday` and `json 3.0.0`.
+
+Check the installed JSON versions:
+
+```bash
+gem list json
+```
+
+If `json 3.0.0` is installed, remove that version:
+
+```bash
+gem uninstall json -v 3.0.0
+```
+
+Then verify:
+
+```bash
+gem list json
+```
+
+After removing `json 3.0.0`, run SecEye again.
+
 ## Documentation
 
 - [00 - Overview](./00_overview/)
